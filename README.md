@@ -11,9 +11,8 @@ Here I share some small codes which are helpful to do some small tasks in a few 
 
 👉Create mask and remove background
 
-![b1](https://user-images.githubusercontent.com/61602017/113503181-d005e600-954d-11eb-9881-274ca6c9f936.jpg)
 ![p1](https://user-images.githubusercontent.com/61602017/113503182-d1371300-954d-11eb-8aea-7c3c2e1a41d3.jpg)
-
+![b1](https://user-images.githubusercontent.com/61602017/113503181-d005e600-954d-11eb-9881-274ca6c9f936.jpg)
 
 👉 Generate Image and save in folder
 

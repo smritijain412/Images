@@ -1,0 +1,64 @@
+import imageai
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+from imageai import Detection
+#imageai file load model 
+execution_path = os.getcwd()
+detector = Detection.ObjectDetection()
+detector.setModelTypeAsRetinaNet()
+detector.setModelPath("resnet50_coco_best_v2.1.0.h5")
+detector.loadModel()
+custom = detector.CustomObjects(handbag=True)
+#Store time values in a list
+times=0
+time_lis=[]
+c=0
+video_path=r"C:\Users\smriti.jain\Desktop\VideoCapturing\TJC.mp4"
+cap = cv2.VideoCapture(video_path)  #Capture video
+success,image = cap.read()   #read frmaes
+frame_no = 0
+while(cap.isOpened()):
+    frame_exists, curr_frame = cap.read()   
+    if frame_exists:
+        times+=int(np.ceil(cap.get(cv2.CAP_PROP_FPS)))
+        time_lis.append(times)
+    else:
+        break
+len(time_lis)
+video = cv2.VideoCapture(video_path)
+# video.set(cv2.CAP_PROP_FPS,12)
+# the frame rate or frames per second
+frame_rate = video.get(cv2.CAP_PROP_FPS)
+# the total number of frames
+total_num_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)
+# the duration in seconds
+duration = total_num_frames / frame_rate
+print(duration,frame_rate)
+#
+a=time_lis.index(1200)
+len(time_lis[::a][1:])
+#detect object in frame
+times=0
+c=0
+cap = cv2.VideoCapture(video_path)  #Capture video
+success,image = cap.read()   #read frmaes
+frame_no = 0
+while(cap.isOpened()):
+    frame_exists, curr_frame = cap.read()   
+    if frame_exists:
+        times+=int(np.ceil(cap.get(cv2.CAP_PROP_FPS)))      
+        if times in time_lis[::a][1:]:   #set step
+            c+=1
+            cv2.imwrite('frame_images_TJC.jpg',curr_frame)   #save file 
+            detections = detector.detectObjectsFromImage(custom_objects=custom,input_image=os.path.join(execution_path , "frame_images_TJC.jpg"), output_image_path=os.path.join(execution_path , "detect_images_TJC.jpg"),minimum_percentage_probability=45) #detect class in files
+            if detections!=[]:
+                    print(times)
+                    plt.imshow(curr_frame)  
+                    print("calculate Time",(times//frame_rate)//frame_rate)
+                    break      
+    else:
+        break
+    frame_no += 1
+cap.release()

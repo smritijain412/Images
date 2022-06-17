@@ -1,0 +1,18 @@
+!sudo apt install tesseract-ocr
+!pip install pytesseract
+import pytesseract
+import shutil
+import os
+import random
+from PIL import Image
+import matplotlib.pyplot as plt
+text=[]
+image_path_in_colab='/content/DL-037-01-21-jg.jpg'
+for i in os.listdir('/content/x/x'):
+  img='/content/x/x/'+i
+  extractedInformation = pytesseract.image_to_string(Image.open(img))
+  if 'Net Image Final Image' in extractedInformation:
+    img=plt.imread(img)
+    plt.imshow(img)
+    plt.show()
+    text.append(i)
